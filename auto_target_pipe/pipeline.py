@@ -214,7 +214,10 @@ class GeneInteractionModel:
                     continue
                 vector_b = per_gene_vectors[other_gene]
                 correlations.append(_pearson_correlation(vector_a, vector_b))
-            strengths[gene] = mean(abs(corr) for corr in correlations)
+            if correlations:
+                strengths[gene] = mean(abs(corr) for corr in correlations)
+            else:
+                strengths[gene] = 0.0
         return strengths
 
 

@@ -104,6 +104,18 @@ class GeneInteractionModelTests(unittest.TestCase):
 
         self.assertEqual(strengths, strengths_default)
 
+    def test_single_gene_returns_zero_strength(self) -> None:
+        dataset = [
+            {"G1": 1.0},
+            {"G1": 2.0},
+        ]
+
+        interaction_model = GeneInteractionModel()
+
+        strengths = interaction_model.interaction_strength(dataset)
+
+        self.assertEqual(strengths, {"G1": 0.0})
+
 
 class TargetPrioritizerTests(unittest.TestCase):
     def test_combines_components_and_metadata(self) -> None:
